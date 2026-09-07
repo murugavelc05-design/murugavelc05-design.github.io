@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Tuvi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #09090b;
+            --bg-surface: #18181b;
+            --brand-primary: #14b8a6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--brand-primary); }
+
+        .legal-header { margin-bottom: 3rem; }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        .last-updated { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.2rem; }
+        
+        h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; color: #fff; }
+        h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; color: #e2e8f0; }
+        
+        p, ul, ol { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem; }
+        ul, ol { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        
+        a { color: var(--brand-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .loading, .error {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .error { color: #fb7185; }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: var(--brand-primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo">TUVI<span>.</span></a>
+    </div>
+</nav>
+
+<main class="container" id="content">
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading Terms & Conditions...</p>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        &copy; <span id="year"></span> Tuvi. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // The path where you will store the text file on your website
+    // If testing locally without a server, this might fail due to CORS. 
+    // You must use Live Server or host it on GitHub Pages.
+    const documentPath = 'doc/Tuvi_Terms_and_Conditions.txt';
+
+    fetch(documentPath)
+        .then(response => {
+            if (!response.ok) throw new Error('Document not found');
+            return response.text();
+        })
+        .then(text => {
+            document.getElementById('content').innerHTML = parseDocument(text);
+        })
+        .catch(err => {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <h2>Unable to load document</h2>
+                    <p>Make sure <code>${documentPath}</code> is uploaded to your server.</p>
+                </div>
+            `;
+        });
+
+    function parseDocument(text) {
+        // Normalize line endings and split
+        const lines = text.replace(/\r\n/g, '\n').split('\n');
+        let html = '';
+        let inList = false;
+        let inHeader = true;
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i].trim();
+            if (line === '') continue;
+
+            // Handle the title
+            if (i === 0) {
+                html += `<div class="legal-header"><h1>${line.replace('— Tuvi', '').trim()}</h1>`;
+                continue;
+            }
+
+            // Handle meta information at the top
+            if (inHeader && (line.startsWith('Last Updated:') || line.startsWith('App:') || line.startsWith('Package:'))) {
+                html += `<p class="last-updated">${line}</p>`;
+                if (i + 1 < lines.length && lines[i+1].trim() === '') {
+                    html += `</div>`;
+                    inHeader = false;
+                }
+                continue;
+            }
+
+            // Close header if we missed it
+            if (inHeader) { html += `</div>`; inHeader = false; }
+
+            // Handle numbered headings (e.g., "1. Introduction")
+            if (/^\d+\.\s/.test(line)) {
+                if (inList) { html += '</ul>'; inList = false; }
+                html += `<h2>${line}</h2>`;
+                continue;
+            }
+
+            // Handle bullet points
+            if (line.startsWith('•')) {
+                if (!inList) { html += '<ul>'; inList = true; }
+                html += `<li>${line.substring(1).trim()}</li>`;
+                continue;
+            }
+
+            // Normal paragraphs
+            if (inList) { html += '</ul>'; inList = false; }
+            
+            // Auto-link emails
+            line = line.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi, '<a href="mailto:$1">$1</a>');
+            
+            html += `<p>${line}</p>`;
+        }
+        
+        if (inList) { html += '</ul>'; }
+        if (inHeader) { html += `</div>`; } // Just in case
+        
+        return html;
+    }
+</script>
+
+</body>
+</html>

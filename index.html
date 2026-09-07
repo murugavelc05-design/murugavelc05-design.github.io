@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuvi - Money between people, made clear.</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <svg style="display:none;">
+        <symbol id="icon-play" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="icon-cloud" viewBox="0 0 24 24">
+            <path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 12.1325 20.177 10.2016 17.8687 10.0163C17.3822 6.61901 14.4754 4 11 4C7.13401 4 4 7.13401 4 11C4 11.2384 4.01193 11.474 4.03493 11.7061C1.76517 12.0645 0 14.0779 0 16.5C0 19.5376 2.46243 22 5.5 22H17.5V19Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="icon-heart" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="icon-wallet" viewBox="0 0 24 24">
+            <rect x="2" y="5" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <div class="container">
+        <nav>
+            <a href="#" class="logo" style="display:flex; align-items:center; gap: 8px; text-decoration: none;">
+                <img src="assets/tuvi_app_icon.png" alt="Tuvi" style="width: 32px; height: 32px; border-radius: 8px;">
+                <h2 style="font-size: 1.5rem; margin: 0; color: #fff;">Tuvi</h2>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Why Tuvi</a>
+                <a href="#features">Features</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+            
+            <a href="#" class="btn btn-primary">
+                Coming Soon
+            </a>
+        </nav>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="container hero">
+        <div class="hero-content">
+            <span class="eyebrow">People make life richer</span>
+            <h1>Money is simple.<br>Until people are<br><span class="text-mint">involved.</span></h1>
+            <p>Track your expenses, manage lending and borrowing, split bills, and keep every repayment clear — all in one place.</p>
+            
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Coming Soon on Google Play
+                </a>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge">
+                    <svg viewBox="0 0 24 24"><use href="#icon-shield"></use></svg>
+                    Your data stays yours
+                </div>
+                <div class="badge">
+                    <svg viewBox="0 0 24 24"><use href="#icon-cloud"></use></svg>
+                    Sync across your devices
+                </div>
+                <div class="badge">
+                    <svg viewBox="0 0 24 24" class="text-red" style="color: #ff5f5f;"><use href="#icon-heart"></use></svg>
+                    Built for real relationships
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            
+            <!-- SVG Abstract Network connecting avatars to phone -->
+            <svg class="network-svg">
+                <!-- Curve to Anna -->
+                <path class="net-line mint" d="M 50% 50% Q 20% 30% 30% 10%" />
+                <!-- Curve to Appa -->
+                <path class="net-line mint" d="M 50% 50% Q 20% 50% 25% 40%" />
+                <!-- Curve to Divya -->
+                <path class="net-line red" d="M 50% 50% Q 80% 30% 75% 15%" />
+                <!-- Curve to Karthik -->
+                <path class="net-line mint" d="M 50% 50% Q 80% 60% 75% 55%" />
+            </svg>
+
+            <!-- Complete CSS Phone Mockup containing real Tuvi UI representation -->
+            <div class="css-phone">
+                <div class="phone-ui">
+                    <div class="ui-header">Good evening,<br><strong>Murugavel 👋</strong></div>
+                    
+                    <div class="ui-main-balance">
+                        <span class="label">Total Balance</span>
+                        <div class="amount">₹ 24,850</div>
+                    </div>
+                    
+                    <div class="ui-split-cards">
+                        <div class="ui-card get">
+                            <span class="label">You'll get</span>
+                            <span class="amount">₹ 12,300</span>
+                        </div>
+                        <div class="ui-card owe">
+                            <span class="label">You owe</span>
+                            <span class="amount">₹ 5,450</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-activity">
+                        <div class="ui-activity-title">Recent Activity</div>
+                        
+                        <div class="ui-item">
+                            <div class="ui-avatar">🍽️</div>
+                            <div class="ui-item-info">
+                                <div class="ui-item-name">Dinner with friends</div>
+                                <div class="ui-item-desc">Split bill · 3 people</div>
+                            </div>
+                            <div class="ui-item-amt neg">-₹1,200</div>
+                        </div>
+                        
+                        <div class="ui-item">
+                            <div class="ui-avatar">A</div>
+                            <div class="ui-item-info">
+                                <div class="ui-item-name">Arun</div>
+                                <div class="ui-item-desc">Repaid to you</div>
+                            </div>
+                            <div class="ui-item-amt pos">+₹500</div>
+                        </div>
+                        
+                        <div class="ui-item">
+                            <div class="ui-avatar">🛒</div>
+                            <div class="ui-item-info">
+                                <div class="ui-item-name">Amazon</div>
+                                <div class="ui-item-desc">Personal expense</div>
+                            </div>
+                            <div class="ui-item-amt neg">-₹2,450</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Only Divya and Karthik -->
+            <div class="avatar-node node-3" style="top: 20%; left: -5%; animation-delay: 2s;">
+                <img src="https://ui-avatars.com/api/?name=Divya&background=ff5f5f&color=fff&rounded=true" alt="Divya">
+                <div class="avatar-info">
+                    <span class="name text-red">Divya</span>
+                    <span class="status">Owes you</span>
+                    <span class="amount">₹ 2,000</span>
+                </div>
+            </div>
+            
+            <div class="avatar-node node-4" style="top: 60%; right: -15%; animation-delay: 3s;">
+                <img src="https://ui-avatars.com/api/?name=Karthik&background=60a5fa&color=fff&rounded=true" alt="Karthik">
+                <div class="avatar-info">
+                    <span class="name text-mint">Karthik</span>
+                    <span class="status">Settle up</span>
+                    <span class="amount">₹ 500</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SITUATION / STORYTELLING SECTION -->
+    <section class="container storytelling">
+        <div class="storytelling-content">
+            <span class="eyebrow">You know the situation</span>
+            <h2>You paid.<br>They borrowed.<br>Someone repaid.<br>Another bill was split.<br><span class="text-mint">Now... who owes what?</span></h2>
+            <p>Tuvi keeps every connection, every transaction and every repayment clear.</p>
+        </div>
+        
+        <div class="storytelling-visual">
+            <div class="receipt-card">
+                <div class="receipt-header">Dinner with friends</div>
+                <div class="receipt-total">₹ 1,500</div>
+                <div class="receipt-paid">You paid ₹ 1,500</div>
+                <div class="receipt-split">
+                    <div class="split-row"><span>You</span><span>₹ 500</span></div>
+                    <div class="split-row"><span>Divya</span><span class="text-red">Owes ₹ 500</span></div>
+                    <div class="split-row"><span>Karthik</span><span class="text-red">Owes ₹ 500</span></div>
+                </div>
+            </div>
+            
+            <div class="speech-bubble bubble-1" style="top: 10%; left: 0%;">Wait, did Divya pay?</div>
+            <div class="speech-bubble bubble-2" style="bottom: 15%; right: -5%;">How much was my share?</div>
+            <div class="speech-bubble bubble-3" style="top: 50%; right: -10%;">Let's check Tuvi.</div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="container features">
+        <div class="features-header">
+            <div>
+                <span class="eyebrow">Built for real life</span>
+                <h2>More than just<br>expense tracking.</h2>
+            </div>
+            <div>
+                <p style="margin-bottom: 1.5rem;">Tuvi adapts to the way you handle money in real life — with people, for moments that matter.</p>
+                <a href="#" class="btn btn-outline">Explore Features &rarr;</a>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-box red">
+                    <svg viewBox="0 0 24 24"><use href="#icon-wallet"></use></svg>
+                </div>
+                <h3>Your Money</h3>
+                <p>Track expenses, income and savings with clarity.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box purple">
+                    <svg viewBox="0 0 24 24"><use href="#icon-users"></use></svg>
+                </div>
+                <h3>Money Between People</h3>
+                <p>Keep track of lending, borrowing and repayments.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box blue">
+                    <svg viewBox="0 0 24 24"><use href="#icon-users"></use></svg>
+                </div>
+                <h3>Split Bills</h3>
+                <p>Split expenses with friends, family or groups easily.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box green">
+                    <svg viewBox="0 0 24 24"><use href="#icon-shield"></use></svg>
+                </div>
+                <h3>Trusted Repayments</h3>
+                <p>Every repayment can be recorded and verified.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="container">
+        <div class="footer-cta">
+            <div class="abstract-graphic">
+                <div class="glow-orb"></div>
+                <p style="position:absolute; top: -30px; left:20px; white-space: nowrap;" class="handwritten">Small Steps<br>Brighter<br>Tomorrows</p>
+            </div>
+            
+            <div class="cta-content">
+                <h2>A clearer relationship<br>with your money starts here.</h2>
+                <p>Tuvi — Money, made clearer.</p>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                    Coming Soon on Google Play
+                </a>
+            </div>
+            
+            <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%); text-align:left;">
+                <p class="text-gray" style="font-size: 0.9rem;">Better money habits.<br>Stronger relationships.<br>A brighter you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN FOOTER -->
+    <div class="container">
+        <footer>
+            <div class="footer-inner">
+                <a href="#" class="logo" style="display:flex; align-items:center; gap: 8px; text-decoration: none;">
+                    <img src="assets/tuvi_app_icon.png" alt="Tuvi" style="width: 32px; height: 32px; border-radius: 8px;">
+                    <h2 style="font-size: 1.5rem; margin: 0; color: #fff;">Tuvi</h2>
+                </a>
+                
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                    <a href="mailto:support.tuvi@gmail.com">Contact</a>
+                </div>
+                
+                <p class="text-gray" style="font-size: 0.85rem;">&copy; <span id="year"></span> Tuvi. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
