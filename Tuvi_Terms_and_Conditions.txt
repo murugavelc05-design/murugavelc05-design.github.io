@@ -1,0 +1,154 @@
+Terms & Conditions — Tuvi
+
+Last Updated: August 29, 2026
+App: Tuvi — Money Manager
+
+
+1. Acceptance of Terms
+
+These Terms & Conditions ("Terms") govern your use of the Tuvi mobile application ("Tuvi", "App", "Service", "we", "our", or "us").
+
+By downloading, installing, accessing, or using Tuvi, you agree to be bound by these Terms. If you do not agree with these Terms, please do not use the App.
+
+2. Description of Service
+
+Tuvi is a personal money management and financial tracking application designed to help users record and organize their financial activity. The App allows users to track income and expenses, organize financial records, monitor lending and borrowing, record repayments and settlements, manage shared or split expenses, and view financial summaries and outstanding balances.
+
+Tuvi is a financial tracking and record-keeping tool only. Tuvi is not a bank, financial institution, payment processor, lender, money transmitter, or payment service provider.
+
+The App does not hold, receive, transfer, process, or facilitate actual funds between users. Any records relating to lending, borrowing, repayments, settlements, expenses, or shared bills are informational records created and managed by users.
+
+Any real-world payment or repayment between individuals takes place outside the App using payment methods independently chosen by the users involved.
+
+3. Eligibility
+
+You must be at least 13 years old, or the minimum age required to use the App in your country, whichever is higher.
+
+By using Tuvi, you represent that you meet the applicable minimum age requirement and have the legal capacity to agree to these Terms.
+
+4. Account Registration and Authentication
+
+Tuvi currently uses Google Sign-In for account authentication.
+
+You are responsible for maintaining the security of your Google Account and for activity performed through your Tuvi account. You should take reasonable steps to protect access to your device and Google Account.
+
+You may sign out of Tuvi at any time. Signing out ends your active session but does not delete your Tuvi account or cloud-synchronized data.
+
+Account and data deletion are handled separately and are available through the deletion process described in Tuvi's Privacy Policy and Account & Data Deletion Policy.
+
+5. User Responsibilities
+
+You are responsible for the information you enter into Tuvi, including financial amounts, transaction details, categories, balances, and participant information.
+
+Tuvi does not independently verify, audit, or guarantee the accuracy of information entered by users. You are responsible for reviewing your records and ensuring that information shared with other users is accurate and appropriate.
+
+You agree not to use Tuvi for unlawful purposes, including fraud, financial misrepresentation, harassment, or any activity that violates applicable laws or the rights of others.
+
+If you choose to add information about another person, including their name, email address, or phone number, you are responsible for ensuring that you have an appropriate basis to use that information within the App.
+
+6. Shared Financial Records
+
+Tuvi may allow users to create and share certain financial records with other active Tuvi users. These records may include shared expenses, split bills, lending or borrowing records, repayments, and settlements.
+
+When you choose to share a record, relevant information associated with that record may become accessible to the participants associated with it. You are responsible for understanding what information you choose to share before adding another participant.
+
+Shared records are intended to help participants maintain a consistent financial history. As a result, the deletion of one user's account does not automatically require the deletion of genuinely shared financial records used by other active participants.
+
+When a participant removes a shared record from their account or deletes their Tuvi account, their access to the record may be removed while relevant financial history remains available to other active participants.
+
+The handling of shared records during account deletion is explained in Tuvi's Privacy Policy and Account & Data Deletion Policy.
+
+7. Financial Records and User Disputes
+
+Tuvi records financial information entered by users but does not participate in, verify, enforce, or guarantee real-world financial arrangements between individuals.
+
+Tuvi is not responsible for disputes relating to money lent, borrowed, shared, owed, repaid, or otherwise recorded in the App.
+
+Users remain solely responsible for their real-world financial arrangements, agreements, payments, and obligations.
+
+Tuvi is also not responsible for decisions made based on financial summaries, calculations, balances, or insights displayed within the App. Users should independently verify important financial information before relying on it for significant financial, legal, tax, investment, or business decisions.
+
+8. Data Availability and Synchronization
+
+Tuvi uses local storage and cloud synchronization to support normal application functionality and access to user data across supported devices.
+
+Cloud synchronization may depend on internet connectivity, service availability, successful synchronization, device configuration, and other technical factors.
+
+While reasonable efforts are made to support data availability and synchronization, Tuvi cannot guarantee uninterrupted availability, error-free synchronization, or permanent accessibility of all data at all times.
+
+Users should not rely on Tuvi as the sole record for critical legal, financial, business, tax, or regulatory purposes.
+
+9. Monetization
+
+Tuvi is currently offered free of charge.
+
+The current version of the App does not include advertisements, paid subscriptions, or in-app purchases.
+
+If Tuvi introduces advertisements, subscriptions, premium features, in-app purchases, or other paid services in the future, appropriate information and applicable terms will be provided before those services become available.
+
+10. Intellectual Property
+
+The Tuvi application, including its design, branding, logo, user interface, features, content, and underlying software, is owned by or licensed to the developer of Tuvi and is protected by applicable intellectual property laws.
+
+Subject to these Terms, you are granted a limited, non-exclusive, non-transferable, and revocable license to use Tuvi for personal, non-commercial purposes.
+
+You may not copy, reproduce, modify, distribute, reverse engineer, decompile, misuse, or create derivative works from the App except where expressly permitted by applicable law.
+
+11. Privacy and Data Handling
+
+Your use of Tuvi is also governed by our Privacy Policy and Account & Data Deletion Policy.
+
+These documents explain how information is collected, used, stored, synchronized, shared, retained, and deleted.
+
+By using Tuvi, you acknowledge the data practices described in those policies.
+
+12. Suspension or Termination
+
+You may stop using Tuvi at any time. You may also delete your account using the account deletion option available within the App.
+
+We may suspend or terminate access to Tuvi where reasonably necessary, including where a user violates these Terms, misuses the Service, creates security risks, or uses the App in violation of applicable law.
+
+Where technically and legally appropriate, suspension or termination of access may not automatically result in the deletion of all associated data. Account deletion is handled according to Tuvi's Account & Data Deletion Policy.
+
+13. Disclaimers
+
+Tuvi is provided on an "as is" and "as available" basis.
+
+To the maximum extent permitted by applicable law, we make no warranties or guarantees regarding the accuracy, reliability, completeness, availability, uninterrupted operation, or suitability of the App for any particular purpose.
+
+Tuvi is designed as a financial tracking and organizational tool. The App does not provide financial, investment, tax, accounting, or legal advice.
+
+You should independently verify important financial information and seek professional advice where appropriate before making significant financial decisions.
+
+The App may occasionally be unavailable due to maintenance, software updates, technical issues, service interruptions, third-party service availability, or circumstances outside our reasonable control.
+
+14. Limitation of Liability
+
+To the maximum extent permitted by applicable law, Tuvi and its developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the App.
+
+This includes, to the extent permitted by law, losses arising from inaccurate user-entered information, disputes between users, interrupted synchronization, loss of access, financial decisions made using information displayed in the App, or technical service interruptions.
+
+Nothing in these Terms limits or excludes liability where such limitation or exclusion is prohibited by applicable law.
+
+15. Changes to These Terms
+
+We may update these Terms from time to time to reflect changes to the App, its features, operational practices, or applicable legal requirements.
+
+When changes are made, the "Last Updated" date at the beginning of these Terms will be revised.
+
+Where significant changes are made, we may provide additional notice through the App or other appropriate means.
+
+Continued use of Tuvi after updated Terms become effective constitutes acceptance of the revised Terms to the extent permitted by applicable law.
+
+16. Governing Law
+
+These Terms shall be governed by and interpreted in accordance with the laws of India, without regard to conflict of law principles.
+
+Nothing in these Terms affects any mandatory consumer protection rights that may apply under applicable law.
+
+17. Contact Us
+
+If you have questions about these Terms & Conditions or the use of Tuvi, you may contact us at:
+
+Tuvi Support
+Email: support.tuvi@gmail.com

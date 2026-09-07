@@ -1,0 +1,151 @@
+Privacy Policy — Tuvi
+
+Last Updated: August 29, 2026
+App: Tuvi — Money Manager
+
+
+1. Introduction
+
+This Privacy Policy explains how Tuvi ("Tuvi", "we", "our", "us", or "the App") collects, uses, stores, and protects information when you use the Tuvi mobile application.
+
+Tuvi is a personal money management and financial tracking application designed to help users record and organize income, expenses, categories, lending and borrowing, repayments, settlements, financial insights, budgets, and shared or split bills.
+
+By downloading, installing, accessing, or using Tuvi, you agree to the practices described in this Privacy Policy. If you do not agree with this Policy, please do not use the App.
+
+2. Information We Collect
+
+Account and Authentication Information
+
+Tuvi uses Google Sign-In and Firebase Authentication for secure account authentication. When you sign in, we receive and store account credentials necessary to authenticate your identity, including:
+• Your name
+• Your verified Google email address
+• A unique Firebase Authentication identifier (UID)
+• Profile photo URL where available
+• Optional contact phone number entered by you for personal profile identification
+
+Tuvi does not have access to or store your Google Account password. Authentication is handled securely through Google Identity Services and Firebase Authentication.
+
+Financial Information
+
+Tuvi stores financial information that you voluntarily enter into the App. This may include:
+• Income and expense records
+• Expense categories and monthly budget limits
+• Lending and borrowing transactions, due dates, and notes
+• Repayment and settlement histories
+• Shared or split bill records and participant share amounts
+
+This information is entered directly by you. Tuvi does not connect to your bank account, credit card, financial institution, or payment provider to automatically scrape or pull financial transactions. Tuvi is not a financial institution, bank, or payment processor.
+
+Contact and Participant Information
+
+When using shared expenses, lending, borrowing, repayments, or settlement features, you may choose to record a contact's name or phone number, or connect a record with another Tuvi user via their verified Google email or phone number.
+
+Tuvi does not scan, scrape, or upload your entire contact book. Contact selection is initiated exclusively by you, and only the specific contact details you choose to attach to a financial record are stored.
+
+Tuvi does not sell, rent, or trade contact or participant information with third parties for advertising or marketing purposes.
+
+Security and Technical Information
+
+Tuvi provides optional privacy and security controls:
+• App Lock (4-digit security PIN)
+• Biometric Unlock (Fingerprint or Face Authentication)
+• Hide Amounts (Privacy screen blur)
+
+Biometric authentication is handled entirely by your device's operating system via Android BiometricPrompt APIs. Tuvi does not collect, store, transmit, or have access to your biometric raw data or templates.
+
+Tuvi may check network connectivity status to determine whether cloud synchronization is active or whether offline-first local mode should be used. The App contains zero third-party advertising SDKs, zero advertising analytics, and zero tracking cookies.
+
+3. How Your Data Is Stored & Synchronized
+
+Tuvi uses an offline-first architecture combined with Google Firebase cloud infrastructure to support seamless data access:
+
+• Local Storage: Cached locally on your device to support fast performance, smooth animations, and complete offline access.
+• Cloud Storage: Synchronized to Google Cloud Firestore under your authenticated Firebase UID when internet connectivity is available.
+
+Cloud synchronization ensures your data is safely backed up and available when you sign in across supported devices or reinstall the application. All communications with Cloud Firestore and Firebase Authentication use industry-standard HTTPS / TLS encryption in transit.
+
+4. How We Use Your Information
+
+Tuvi uses your information exclusively to provide, maintain, and enhance the App's core functionality, including:
+• Authenticating user accounts and maintaining secure sessions
+• Storing, computing, and organizing your financial records and summaries
+• Calculating debt balances, lending/borrowing totals, and repayment tracking
+• Managing split bills and real-time ledger synchronization between participants
+• Generating offline analytics, category breakdowns, and monthly financial insights
+• Protecting account security and verifying user status on launch
+
+Tuvi does not use your personal, transaction, or financial data for targeted advertising or user profiling.
+
+5. Data Sharing and Third-Party Infrastructure
+
+Tuvi does not sell your personal data, transaction records, or contact details to third-party data brokers or advertisers.
+
+Tuvi utilizes Google Firebase (Google LLC) as its backend cloud infrastructure provider:
+• Firebase Authentication: Secure identity management and user sign-in.
+• Cloud Firestore: Encrypted cloud database for data synchronization and backup.
+
+Google processes this data on behalf of Tuvi as a cloud service provider under strict data protection and security commitments. Tuvi v1.0 contains no third-party advertising SDKs (e.g. AdMob) and no external analytics trackers.
+
+6. Shared Financial Records & Multi-User Ledgers
+
+Tuvi allows users to voluntarily share ledgers, split bills, and lending/borrowing records with other active Tuvi users.
+
+• Granular Sharing: A financial record is shared only when you explicitly connect a record with another user via their verified email or user identifier.
+• Participant Access: All active participants associated with a shared record can view the transaction amount, date, description note, and settlement repayment history.
+• Privacy Control: You can remove participants or make a shared ledger private at any time directly within the App.
+• Non-Shared Data: Your private income, personal expenses, custom categories, and personal monthly budgets are never shared with other users.
+
+7. Data Retention, Account Deletion & Safety Lock
+
+Tuvi retains your data while your account is active. You have complete control over your data and can permanently delete your account at any time.
+
+15-Second Safety Lock & 3-Step Verification:
+To prevent accidental, unintended, or impulsive account wipes, Tuvi enforces a mandatory safety lock:
+1. A 15-second countdown security lock must elapse before the deletion action can be authorized.
+2. A progressive 3-step verification confirmation requires explicit acknowledgment of:
+   • Step 1: Permanent erasure of all private financial records (expenses, income, budgets, categories).
+   • Step 2: Revocation of access to shared ledgers while preserving balance integrity for remaining active friends.
+   • Step 3: Irrevocable destruction of your Google profile and cloud authentication credentials.
+
+Data Deletion Execution:
+When account deletion is confirmed:
+• Private Records: 100% of your private expenses, income records, monthly budgets, custom categories, and unshared lending records are permanently hard-deleted from our cloud servers and local storage.
+• Shared Records: To prevent accidental financial balance destruction for remaining active participants (such as friends or family who rely on the shared history), your user identifier is removed from the record's active participants list. The financial balance and repayment history remain visible to remaining participants, while your personal account profile is destroyed. If no active participants remain on a shared record, the record and all linked settlements are permanently hard-deleted.
+• User Profile: Your user profile documents (including your account UID, email association, and phone association) are permanently hard-deleted from Cloud Firestore.
+• Firebase Authentication: Your Firebase Authentication user account is permanently deleted.
+• Client Cache: Local SharedPreferences, cached data, and security PINs are completely wiped on your device, and the app resets to the initial onboarding screen.
+
+8. Children's Privacy
+
+Tuvi is designed for general audiences and is not directed to children under the age of 13 (or the minimum legal age in your jurisdiction). We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us at support.tuvi@gmail.com, and we will promptly delete such information.
+
+9. International Data Transfers
+
+Tuvi uses Google Firebase cloud infrastructure. Your data may be stored and processed in secure data centers located outside your country of residence, subject to industry-standard data protection safeguards and encryption standards.
+
+10. Your Rights and Choices
+
+Depending on your jurisdiction, you have the right to:
+• Access the personal and financial information stored in your account.
+• Export your financial records into standard CSV or JSON backup files directly from the App settings.
+• Update or edit your profile information, categories, budgets, and transaction records.
+• Permanently delete your entire account and all associated private records at any time.
+
+11. Data Security
+
+We implement rigorous administrative, technical, and physical security measures to safeguard your information:
+• All network communications are encrypted using Transport Layer Security (TLS/HTTPS).
+• Cloud Firestore security rules enforce strict authentication checks so only verified participants can read or modify authorized records.
+• Optional client-side security measures (App Lock PIN, Biometric Unlock, and Privacy Hide Amounts) protect your data on physical devices.
+
+12. Changes to This Privacy Policy
+
+We may update this Privacy Policy periodically to reflect enhancements to our features, legal requirements, or operational changes. When updates occur, the "Last Updated" date at the top of this document will be updated. We encourage you to review this Privacy Policy periodically.
+
+13. Contact Us
+
+If you have any questions, feedback, or concerns regarding this Privacy Policy or your personal data, please contact:
+
+Tuvi Support
+Email: support.tuvi@gmail.com
+Application: Tuvi — Money Manager
