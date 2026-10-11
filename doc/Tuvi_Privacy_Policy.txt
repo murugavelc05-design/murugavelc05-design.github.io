@@ -1,6 +1,6 @@
 Privacy Policy — Tuvi
 
-Last Updated: August 29, 2026
+Last Updated: October 2, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
@@ -71,8 +71,8 @@ Tuvi uses your information exclusively to provide, maintain, and enhance the App
 • Storing, computing, and organizing your financial records and summaries
 • Calculating debt balances, lending/borrowing totals, and repayment tracking
 • Managing split bills and real-time ledger synchronization between participants
-• Generating offline analytics, category breakdowns, and monthly financial insights
-• Protecting account security and verifying user status on launch
+• Generating offline analytics, category breakdowns, monthly financial insights, and a Financial Health Score derived entirely from your own recorded transactions and payment history
+• Protecting account security and verifying user status on launch, including enforcing account suspensions where necessary for security or policy reasons
 
 Tuvi does not use your personal, transaction, or financial data for targeted advertising or user profiling.
 

@@ -1,6 +1,6 @@
 Terms & Conditions — Tuvi
 
-Last Updated: August 29, 2026
+Last Updated: October 2, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
@@ -106,7 +106,7 @@ By using Tuvi, you acknowledge the data practices described in those policies.
 
 You may stop using Tuvi at any time. You may also delete your account using the account deletion option available within the App.
 
-We may suspend or terminate access to Tuvi where reasonably necessary, including where a user violates these Terms, misuses the Service, creates security risks, or uses the App in violation of applicable law.
+We may suspend or terminate access to Tuvi where reasonably necessary, including where a user violates these Terms, misuses the Service, creates security risks, or uses the App in violation of applicable law. A suspended or blocked account loses access to cloud-synchronized financial data and shared records until the restriction is lifted by us; account status cannot be reversed from within the App.
 
 Where technically and legally appropriate, suspension or termination of access may not automatically result in the deletion of all associated data. Account deletion is handled according to Tuvi's Account & Data Deletion Policy.
 
