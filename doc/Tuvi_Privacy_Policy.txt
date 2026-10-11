@@ -1,6 +1,6 @@
 Privacy Policy — Tuvi
 
-Last Updated: October 2, 2026
+Last Updated: October 11, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
@@ -20,10 +20,11 @@ Tuvi uses Google Sign-In and Firebase Authentication for secure account authenti
 • Your name
 • Your verified Google email address
 • A unique Firebase Authentication identifier (UID)
-• Profile photo URL where available
 • Optional contact phone number entered by you for personal profile identification
 
 Tuvi does not have access to or store your Google Account password. Authentication is handled securely through Google Identity Services and Firebase Authentication.
+
+Before you sign in with Google, the App may briefly establish an anonymous Firebase Authentication session (an auto-generated, temporary identifier with no personal information attached) to enable offline-first local functionality. This anonymous identifier is replaced once you sign in with Google.
 
 Financial Information
 
