@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account | Tuvi</title>
+    <meta name="description" content="Request permanent deletion of your Tuvi account and associated personal data.">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-2: #212125;
+            --brand-primary: #4CCB5A;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --danger: #fb7185;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--brand-primary); }
+
+        main { padding-bottom: 5rem; }
+
+        .page-header { margin-bottom: 2.5rem; }
+        h1 { font-size: 2.25rem; margin-bottom: 1rem; color: #fff; }
+        h2 { font-size: 1.25rem; margin: 2rem 0 0.75rem; color: #fff; }
+        p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.02rem; }
+        ul { color: var(--text-secondary); padding-left: 1.4rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.4rem; }
+        a { color: var(--brand-primary); }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--brand-primary);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            background: #fff;
+            color: #1f1f1f;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+        .btn-google:hover { opacity: 0.9; }
+        .btn-google:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .account-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-surface-2);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+        .account-row img { width: 36px; height: 36px; border-radius: 50%; }
+        .account-row .email { font-weight: 600; color: #fff; }
+        .account-row .uid { font-size: 0.8rem; color: var(--text-secondary); word-break: break-all; }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 1.25rem 0;
+        }
+        .checkbox-row input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--brand-primary); }
+        .checkbox-row label { color: var(--text-secondary); font-size: 0.95rem; }
+
+        .btn-danger {
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            background: var(--danger);
+            color: #09090b;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+        .btn-danger:hover { opacity: 0.9; }
+        .btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .status-msg { font-size: 0.9rem; margin-top: 0.75rem; }
+        .status-msg.error { color: var(--danger); }
+        .status-msg.info { color: var(--text-secondary); }
+
+        .confirm-box {
+            text-align: center;
+        }
+        .confirm-box .icon-ok {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: rgba(76, 203, 90, 0.15);
+            color: var(--brand-primary);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.75rem;
+        }
+        .ref-id {
+            display: inline-block;
+            background: var(--bg-surface-2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #fff;
+            margin: 0.5rem 0 1rem;
+        }
+
+        [hidden] { display: none !important; }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo">TUVI<span>.</span></a>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="page-header">
+        <h1>Delete your Tuvi account</h1>
+        <p>You can permanently delete your Tuvi account and the personal data associated with it from this page — no need to have the app installed.</p>
+    </div>
+
+    <!-- STEP 1: Sign in -->
+    <div class="card" id="step-signin">
+        <div class="step-label">Step 1 of 3</div>
+        <h2 style="margin-top:0;">Sign in to identify your account</h2>
+        <p>Sign in with the same Google account you use in Tuvi. We use this only to find your account — not to see your financial data.</p>
+        <button class="btn-google" id="btn-google-signin">
+            <svg width="18" height="18" viewBox="0 0 48 48">
+                <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
+                <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l5.7-5.7C34.6 6.1 29.6 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                <path fill="#4CAF50" d="M24 44c5.5 0 10.4-1.8 14.3-5l-6.6-5.6C29.6 35.3 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.5l-6.5 5C9.6 39.6 16.3 44 24 44z"/>
+                <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7h.1l6.6 5.6C37.1 39.9 44 34 44 24c0-1.3-.1-2.7-.4-3.5z"/>
+            </svg>
+            Continue with Google
+        </button>
+        <p class="status-msg error" id="signin-error" hidden></p>
+    </div>
+
+    <!-- STEP 2: Confirm -->
+    <div class="card" id="step-confirm" hidden>
+        <div class="step-label">Step 2 of 3</div>
+        <h2 style="margin-top:0;">Confirm deletion</h2>
+        <div class="account-row">
+            <img id="acct-photo" src="" alt="">
+            <div>
+                <div class="email" id="acct-email"></div>
+                <div class="uid" id="acct-uid"></div>
+            </div>
+        </div>
+        <p>Clicking the button below will immediately, permanently:</p>
+        <ul>
+            <li>Delete your private expenses, income, budgets, categories, and solo lend/borrow records.</li>
+            <li>Remove you from any shared records (split bills, shared loans) — the remaining participant keeps their copy and repayment history, as described below.</li>
+            <li>Delete your Tuvi sign-in account.</li>
+        </ul>
+        <p><strong>This happens immediately and cannot be undone.</strong> There is no review period — once you confirm, the deletion runs right away, the same way it would if you did it from inside the app.</p>
+        <div class="checkbox-row">
+            <input type="checkbox" id="confirm-checkbox">
+            <label for="confirm-checkbox">I understand this will immediately and permanently delete my private data, and that shared records may be retained for other participants as described in the retention policy.</label>
+        </div>
+        <button class="btn-danger" id="btn-submit" disabled>Permanently Delete My Account</button>
+        <button class="btn-secondary" id="btn-signout" style="margin-top: 0.75rem;">Use a different account</button>
+        <p class="status-msg error" id="submit-error" hidden></p>
+        <p class="status-msg info" id="submit-loading" hidden>Deleting your account — this may take a moment, please don't close this page…</p>
+    </div>
+
+    <!-- STEP 3: Done -->
+    <div class="card confirm-box" id="step-done" hidden>
+        <div class="icon-ok">✓</div>
+        <h2 style="margin-top:0;">Account deleted</h2>
+        <p>Your Tuvi account and private data have been permanently deleted. Keep this reference for your records:</p>
+        <div class="ref-id" id="ref-id"></div>
+        <p>If you signed in to the app on a device, it will sign you out automatically the next time it tries to sync.</p>
+        <p>Questions? Contact <a href="mailto:support.tuvi@gmail.com">support.tuvi@gmail.com</a> and mention this reference.</p>
+    </div>
+
+    <h2>What gets deleted, and what's retained</h2>
+    <p><strong>Private records</strong> — expenses, income, budgets, categories, and lend/borrow records that only you can see are permanently deleted.</p>
+    <p><strong>Shared records</strong> — if you've split a bill or shared a loan with someone else, your participation is removed, but the record itself is retained for the remaining participant so their history and balances stay accurate. No new data about you is added after deletion; only what was already recorded (e.g. a past repayment) may remain, consistent with our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms &amp; Conditions</a>.</p>
+    <p><strong>Settlements</strong> — confirmed repayment history tied to shared records is preserved for the remaining participant so their balances stay correct; it is not restored or altered after your account is deleted.</p>
+    <p>If you'd rather request deletion by email instead of this form, contact <a href="mailto:support.tuvi@gmail.com">support.tuvi@gmail.com</a> from the email address associated with your Tuvi account.</p>
+</main>
+
+<footer>
+    <div class="container">
+        &copy; <span id="year"></span> Tuvi. All rights reserved.
+    </div>
+</footer>
+
+<script type="module">
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+        getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, deleteUser, reauthenticateWithPopup
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+        getFirestore, collection, doc, query, where, getDocs, getDoc,
+        writeBatch, setDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // ── Firebase config ──
+    // Web app registered in the same Firebase project as the Android app (tuvi-money-manager).
+    // Still required before this page works: add "murugavelc05-design.github.io" under
+    // Authentication → Settings → Authorized domains in the Firebase Console.
+    const firebaseConfig = {
+        apiKey: "AIzaSyAoKX-kdLTO8my35c1C8oVqRv1D3IDZKXc",
+        authDomain: "tuvi-money-manager.firebaseapp.com",
+        projectId: "tuvi-money-manager",
+        storageBucket: "tuvi-money-manager.firebasestorage.app",
+        messagingSenderId: "48644922032",
+        appId: "1:48644922032:web:37de05b1422527134e7975"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const stepSignin = document.getElementById('step-signin');
+    const stepConfirm = document.getElementById('step-confirm');
+    const stepDone = document.getElementById('step-done');
+
+    const signinError = document.getElementById('signin-error');
+    const submitError = document.getElementById('submit-error');
+    const submitLoading = document.getElementById('submit-loading');
+
+    const acctPhoto = document.getElementById('acct-photo');
+    const acctEmail = document.getElementById('acct-email');
+    const acctUid = document.getElementById('acct-uid');
+
+    const checkbox = document.getElementById('confirm-checkbox');
+    const btnSubmit = document.getElementById('btn-submit');
+
+    document.getElementById('btn-google-signin').addEventListener('click', async () => {
+        signinError.hidden = true;
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+        } catch (err) {
+            signinError.textContent = 'Sign-in failed: ' + err.message;
+            signinError.hidden = false;
+        }
+    });
+
+    document.getElementById('btn-signout').addEventListener('click', async () => {
+        await signOut(auth);
+    });
+
+    checkbox.addEventListener('change', () => {
+        btnSubmit.disabled = !checkbox.checked;
+    });
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            stepSignin.hidden = true;
+            stepConfirm.hidden = false;
+            stepDone.hidden = true;
+            acctPhoto.src = user.photoURL || '';
+            acctPhoto.style.display = user.photoURL ? 'block' : 'none';
+            acctEmail.textContent = user.email || '(no email on this account)';
+            acctUid.textContent = 'Account ID: ' + user.uid;
+            checkbox.checked = false;
+            btnSubmit.disabled = true;
+        } else {
+            stepSignin.hidden = false;
+            stepConfirm.hidden = true;
+        }
+    });
+
+    // Same collections and the same private/shared split as the Android app's
+    // FinanceRepository.deleteAllUserData() — ported here, not reinvented, because Firestore
+    // security rules (not the client platform) are what actually enforce safety: a Web SDK
+    // write under this user's own auth token is checked by the exact same rules.
+    const PRIVATE_COLLECTIONS = ['income', 'budgets', 'recurring_expenses', 'categories'];
+    const BATCH_CHUNK_SIZE = 400; // Firestore batch limit is 500; stay under it like the app does.
+
+    async function commitChunked(db, actions) {
+        for (let i = 0; i < actions.length; i += BATCH_CHUNK_SIZE) {
+            const batch = writeBatch(db);
+            for (const apply of actions.slice(i, i + BATCH_CHUNK_SIZE)) apply(batch);
+            await batch.commit();
+        }
+    }
+
+    async function deleteAllUserData(uid) {
+        const actions = [];
+
+        // 1. Private single-user collections
+        for (const colName of PRIVATE_COLLECTIONS) {
+            const snap = await getDocs(query(collection(db, colName), where('participantIds', 'array-contains', uid)));
+            snap.forEach(d => actions.push(batch => batch.delete(d.ref)));
+        }
+
+        // 2. Expenses (private vs shared split-bill records)
+        const expSnap = await getDocs(query(collection(db, 'expenses'), where('participantIds', 'array-contains', uid)));
+        expSnap.forEach(d => {
+            const exp = d.data();
+            const participantIds = exp.participantIds || [];
+            const remaining = participantIds.filter(p => p !== uid);
+            if (remaining.length === 0 || participantIds.length <= 1) {
+                actions.push(batch => batch.delete(d.ref));
+            } else {
+                actions.push(batch => batch.update(d.ref, { participantIds: remaining, updatedAt: Date.now() }));
+            }
+        });
+
+        // 3. Transactions & linked settlements (private vs shared split)
+        const txSnap = await getDocs(query(collection(db, 'transactions'), where('participantIds', 'array-contains', uid)));
+        for (const txDoc of txSnap.docs) {
+            const tx = txDoc.data();
+            const participantIds = tx.participantIds || [];
+            const remaining = participantIds.filter(p => p !== uid);
+            const isShared = participantIds.length > 1;
+
+            const sSnap = await getDocs(query(collection(db, 'settlements'), where('transactionId', '==', txDoc.id)));
+
+            if (!isShared || remaining.length === 0) {
+                actions.push(batch => batch.delete(txDoc.ref));
+                sSnap.forEach(sDoc => actions.push(batch => batch.delete(sDoc.ref)));
+            } else {
+                actions.push(batch => batch.update(txDoc.ref, { participantIds: remaining, updatedAt: Date.now() }));
+                sSnap.forEach(sDoc => {
+                    const sParticipants = sDoc.data().participantIds || remaining;
+                    const sRemaining = sParticipants.filter(p => p !== uid);
+                    actions.push(batch => batch.update(sDoc.ref, { participantIds: sRemaining, updatedAt: Date.now() }));
+                });
+            }
+        }
+
+        // 4. Primary user profile document
+        actions.push(batch => batch.delete(doc(db, 'users', uid)));
+
+        await commitChunked(db, actions);
+
+        // 5. Email lookup alias (best-effort, same as the app)
+        const email = (auth.currentUser?.email || '').toLowerCase().trim();
+        if (email) {
+            try { await writeBatch(db).delete(doc(db, 'users', 'email_' + email)).commit(); } catch (_) { /* non-fatal */ }
+        }
+    }
+
+    btnSubmit.addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            submitError.textContent = 'Authentication required — please sign in again.';
+            submitError.hidden = false;
+            return;
+        }
+
+        submitError.hidden = true;
+        submitLoading.hidden = false;
+        btnSubmit.disabled = true;
+
+        const uid = user.uid;
+        const email = user.email;
+        const auditRef = doc(db, 'deletionRequests', uid);
+
+        try {
+            // Delete Firestore data FIRST, while still authenticated — deleting the Auth
+            // account ends the session, after which no further authenticated write is possible.
+            // Re-running this on a retry is safe: every step only acts on documents that still
+            // reference this uid, so an already-deleted record is simply not found again.
+            await deleteAllUserData(uid);
+
+            // Audit receipt: create 'data_deleted' only if it doesn't already exist (a retry,
+            // or the same deletion running in a second tab, must not attempt a duplicate
+            // create — Firestore would treat that as an update, which the rules correctly deny
+            // since the permitted update is a different, narrower transition).
+            let auditDoc = await getDoc(auditRef);
+            if (!auditDoc.exists()) {
+                try {
+                    await setDoc(auditRef, {
+                        uid, email,
+                        status: 'data_deleted',
+                        requestedAt: serverTimestamp(),
+                        source: 'web',
+                        policyVersion: '1'
+                    });
+                } catch (raceErr) {
+                    // Another tab/request won the create first. If the doc exists now with the
+                    // expected status, that's fine — proceed. Otherwise this is a real failure.
+                    auditDoc = await getDoc(auditRef);
+                    if (!auditDoc.exists()) throw raceErr;
+                }
+            }
+
+            // Delete the Firebase Auth account last. This can fail if the sign-in is no longer
+            // "recent" (e.g. the user read the page for several minutes before confirming) —
+            // in that case, re-authenticate once and retry just this step. Every failure path
+            // here (first attempt, failed reauth, or failed retry after reauth) converges on
+            // the same honest recording below — none of them is silently swallowed.
+            let authDeleteError = null;
+            try {
+                await deleteUser(user);
+            } catch (err) {
+                if (err.code === 'auth/requires-recent-login') {
+                    try {
+                        await reauthenticateWithPopup(user, new GoogleAuthProvider());
+                        await deleteUser(auth.currentUser);
+                    } catch (retryErr) {
+                        authDeleteError = retryErr;
+                    }
+                } else {
+                    authDeleteError = err;
+                }
+            }
+
+            if (authDeleteError) {
+                // Auth deletion genuinely failed. Data is already gone — record that honestly
+                // instead of letting a stale 'data_deleted' imply more than is true. We're
+                // still authenticated here (deleteUser never succeeded), so this narrow update
+                // is still possible. The rule only allows 'status' and 'updatedAt' to actually
+                // change, so every other field must be re-sent with its exact existing value,
+                // read fresh rather than reused from an earlier, possibly stale variable.
+                try {
+                    const prior = (await getDoc(auditRef)).data();
+                    if (prior) {
+                        await setDoc(auditRef, {
+                            uid: prior.uid,
+                            email: prior.email,
+                            status: 'data_deleted_auth_pending',
+                            requestedAt: prior.requestedAt,
+                            source: prior.source,
+                            policyVersion: prior.policyVersion,
+                            updatedAt: serverTimestamp()
+                        });
+                    }
+                } catch (_) { /* best-effort; the original error below is what matters */ }
+                // Tag it so the outer handler can tell this apart from a failure during
+                // deleteAllUserData() itself, where data may NOT have been deleted yet.
+                authDeleteError.dataAlreadyDeleted = true;
+                throw authDeleteError;
+            }
+
+            submitLoading.hidden = true;
+            stepConfirm.hidden = true;
+            stepDone.hidden = false;
+            document.getElementById('ref-id').textContent = uid;
+        } catch (err) {
+            submitLoading.hidden = true;
+            btnSubmit.disabled = false;
+            if (err.code === 'permission-denied') {
+                submitError.textContent = 'We couldn\'t verify your account to delete it. Your data has not been changed. ' +
+                    'Please contact support.tuvi@gmail.com for help instead of retrying.';
+            } else if (err.dataAlreadyDeleted) {
+                submitError.textContent = 'Your data was deleted, but we could not finish removing your sign-in credential (' + err.message + '). ' +
+                    'It is safe to click the button again to retry just that step. If it keeps failing, email support.tuvi@gmail.com — your financial data is already gone either way.';
+            } else {
+                submitError.textContent = 'Something went wrong before deletion could finish: ' + err.message +
+                    '. It is safe to click the button again — any records already removed will simply be skipped on retry. ' +
+                    'If it keeps failing, email support.tuvi@gmail.com.';
+            }
+            submitError.hidden = false;
+        }
+    });
+</script>
+
+</body>
+</html>
