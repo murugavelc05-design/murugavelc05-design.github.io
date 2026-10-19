@@ -384,27 +384,58 @@
         });
 
         // 3. Transactions & linked settlements (private vs shared split)
+        //
+        // Settlements are queried by `participantIds array-contains uid` — the SAME shape as
+        // every other collection here — not by `transactionId == X` per transaction. This
+        // matters because Firestore validates a list/query operation structurally against the
+        // security rule BEFORE running it: the rule requires `auth.uid in participantIds`, and
+        // a query filtered on `transactionId` gives Firestore no way to prove that holds for
+        // every possible match, so it denies the whole query outright — regardless of whether
+        // the actual results would've individually satisfied the rule. This was a real,
+        // confirmed, pre-existing bug (present in the Android app's own deletion code too, not
+        // just this port): any account with settlement history would silently fail partway
+        // through deletion, exactly like the leftover 7 transactions / 12 settlements found in
+        // production. Fetching settlements once, up front, by participantIds avoids it.
         const txSnap = await getDocs(query(collection(db, 'transactions'), where('participantIds', 'array-contains', uid)));
+        const txFateById = new Map(); // transactionId -> { remove: boolean, remaining: string[] }
         for (const txDoc of txSnap.docs) {
             const tx = txDoc.data();
             const participantIds = tx.participantIds || [];
             const remaining = participantIds.filter(p => p !== uid);
             const isShared = participantIds.length > 1;
+            const remove = !isShared || remaining.length === 0;
+            txFateById.set(txDoc.id, { remove, remaining });
+            actions.push(batch => remove
+                ? batch.delete(txDoc.ref)
+                : batch.update(txDoc.ref, { participantIds: remaining, updatedAt: Date.now() }));
+        }
 
-            const sSnap = await getDocs(query(collection(db, 'settlements'), where('transactionId', '==', txDoc.id)));
-
-            if (!isShared || remaining.length === 0) {
-                actions.push(batch => batch.delete(txDoc.ref));
-                sSnap.forEach(sDoc => actions.push(batch => batch.delete(sDoc.ref)));
-            } else {
-                actions.push(batch => batch.update(txDoc.ref, { participantIds: remaining, updatedAt: Date.now() }));
-                sSnap.forEach(sDoc => {
-                    const sParticipants = sDoc.data().participantIds || remaining;
+        const settlementSnap = await getDocs(query(collection(db, 'settlements'), where('participantIds', 'array-contains', uid)));
+        settlementSnap.forEach(sDoc => {
+            const s = sDoc.data();
+            const fate = txFateById.get(s.transactionId);
+            if (fate) {
+                // Parent transaction's fate (already decided above) governs this settlement.
+                if (fate.remove) {
+                    actions.push(batch => batch.delete(sDoc.ref));
+                } else {
+                    const sParticipants = s.participantIds || fate.remaining;
                     const sRemaining = sParticipants.filter(p => p !== uid);
                     actions.push(batch => batch.update(sDoc.ref, { participantIds: sRemaining, updatedAt: Date.now() }));
-                });
+                }
+            } else {
+                // Defensive fallback: a settlement whose parent transaction wasn't in txSnap
+                // (shouldn't normally happen — settlement.participantIds mirrors its parent's).
+                // Decide from the settlement's own participant list alone.
+                const sParticipants = s.participantIds || [];
+                const sRemaining = sParticipants.filter(p => p !== uid);
+                if (sRemaining.length === 0 || sParticipants.length <= 1) {
+                    actions.push(batch => batch.delete(sDoc.ref));
+                } else {
+                    actions.push(batch => batch.update(sDoc.ref, { participantIds: sRemaining, updatedAt: Date.now() }));
+                }
             }
-        }
+        });
 
         // 4. Primary user profile document
         actions.push(batch => batch.delete(doc(db, 'users', uid)));
@@ -434,12 +465,21 @@
         const email = user.email;
         const auditRef = doc(db, 'deletionRequests', uid);
 
+        // Tracks actual program state, not error codes — the only reliable way to know
+        // whether it's still true to tell the user "nothing changed." A permission-denied can
+        // happen at the audit-write step (e.g. if that collection isn't in the deployed rules
+        // yet) just as easily as at the very first deletion query, and those two cases must
+        // never show the same message: one means nothing happened, the other means the
+        // financial data is already gone and only a receipt/credential step failed.
+        let dataDeleted = false;
+
         try {
             // Delete Firestore data FIRST, while still authenticated — deleting the Auth
             // account ends the session, after which no further authenticated write is possible.
             // Re-running this on a retry is safe: every step only acts on documents that still
             // reference this uid, so an already-deleted record is simply not found again.
             await deleteAllUserData(uid);
+            dataDeleted = true;
 
             // Audit receipt: create 'data_deleted' only if it doesn't already exist (a retry,
             // or the same deletion running in a second tab, must not attempt a duplicate
@@ -506,9 +546,6 @@
                         });
                     }
                 } catch (_) { /* best-effort; the original error below is what matters */ }
-                // Tag it so the outer handler can tell this apart from a failure during
-                // deleteAllUserData() itself, where data may NOT have been deleted yet.
-                authDeleteError.dataAlreadyDeleted = true;
                 throw authDeleteError;
             }
 
@@ -519,12 +556,15 @@
         } catch (err) {
             submitLoading.hidden = true;
             btnSubmit.disabled = false;
-            if (err.code === 'permission-denied') {
+            if (dataDeleted) {
+                // Financial data is confirmed gone — whatever failed was the audit receipt
+                // and/or the Auth credential deletion, never "nothing happened."
+                submitError.textContent = 'Your financial data has been deleted, but we could not finish the last step (' + err.message + '). ' +
+                    'It is safe to click the button again — it will only retry what\'s left. If it keeps failing, email support.tuvi@gmail.com; ' +
+                    'your data is already gone either way.';
+            } else if (err.code === 'permission-denied') {
                 submitError.textContent = 'We couldn\'t verify your account to delete it. Your data has not been changed. ' +
                     'Please contact support.tuvi@gmail.com for help instead of retrying.';
-            } else if (err.dataAlreadyDeleted) {
-                submitError.textContent = 'Your data was deleted, but we could not finish removing your sign-in credential (' + err.message + '). ' +
-                    'It is safe to click the button again to retry just that step. If it keeps failing, email support.tuvi@gmail.com — your financial data is already gone either way.';
             } else {
                 submitError.textContent = 'Something went wrong before deletion could finish: ' + err.message +
                     '. It is safe to click the button again — any records already removed will simply be skipped on retry. ' +
