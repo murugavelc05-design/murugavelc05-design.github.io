@@ -449,11 +449,12 @@
             if (!auditDoc.exists()) {
                 try {
                     await setDoc(auditRef, {
-                        uid, email,
+                        uid,
                         status: 'data_deleted',
                         requestedAt: serverTimestamp(),
                         source: 'web',
-                        policyVersion: '1'
+                        policyVersion: '1',
+                        expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
                     });
                 } catch (raceErr) {
                     // Another tab/request won the create first. If the doc exists now with the
@@ -496,9 +497,9 @@
                     if (prior) {
                         await setDoc(auditRef, {
                             uid: prior.uid,
-                            email: prior.email,
                             status: 'data_deleted_auth_pending',
                             requestedAt: prior.requestedAt,
+                            expiresAt: prior.expiresAt,
                             source: prior.source,
                             policyVersion: prior.policyVersion,
                             updatedAt: serverTimestamp()
