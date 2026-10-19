@@ -173,6 +173,39 @@
             margin: 0.5rem 0 1rem;
         }
 
+        /* 3-step verification + safety-lock countdown, matching the in-app deletion flow */
+        .lock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin: 0.5rem 0 1.25rem;
+        }
+        .lock-badge.waiting { background: rgba(255, 165, 0, 0.15); color: #ffa500; border: 1px solid rgba(255, 165, 0, 0.3); }
+        .lock-badge.cleared { background: rgba(76, 203, 90, 0.15); color: var(--brand-primary); border: 1px solid rgba(76, 203, 90, 0.3); }
+
+        .progress-bars { display: flex; gap: 6px; margin-bottom: 1.25rem; }
+        .progress-bars .bar { flex: 1; height: 4px; border-radius: 2px; background: var(--border-color); }
+        .progress-bars .bar.active { background: var(--danger); }
+
+        .verify-box {
+            background: var(--bg-surface-2);
+            border-radius: 10px;
+            padding: 0.9rem 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .verify-box .verify-title {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--danger); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem;
+        }
+        .verify-box p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+        .btn-row { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+        .btn-row .btn-danger, .btn-row .btn-secondary { margin: 0; }
+
         [hidden] { display: none !important; }
 
         footer {
@@ -215,10 +248,13 @@
         <p class="status-msg error" id="signin-error" hidden></p>
     </div>
 
-    <!-- STEP 2: Confirm -->
+    <!-- STEP 2: Confirm — 3-step progressive verification + 15-second safety lock,
+         matching the in-app deletion flow exactly (same copy, same gating). -->
     <div class="card" id="step-confirm" hidden>
         <div class="step-label">Step 2 of 3</div>
-        <h2 style="margin-top:0;">Confirm deletion</h2>
+        <h2 style="margin-top:0;" id="verify-title">Delete Account (Step 1 of 3)</h2>
+        <div class="lock-badge waiting" id="lock-badge">⏱ <span id="lock-badge-text">Safety Lock: 15s wait</span></div>
+
         <div class="account-row">
             <img id="acct-photo" src="" alt="">
             <div>
@@ -226,18 +262,55 @@
                 <div class="uid" id="acct-uid"></div>
             </div>
         </div>
-        <p>Clicking the button below will immediately, permanently:</p>
-        <ul>
-            <li>Delete your private expenses, income, budgets, categories, and solo lend/borrow records.</li>
-            <li>Remove you from any shared records (split bills, shared loans) — the remaining participant keeps their copy and repayment history, as described below.</li>
-            <li>Delete your Tuvi sign-in account.</li>
-        </ul>
-        <p><strong>This happens immediately and cannot be undone.</strong> There is no review period — once you confirm, the deletion runs right away, the same way it would if you did it from inside the app.</p>
-        <div class="checkbox-row">
-            <input type="checkbox" id="confirm-checkbox">
-            <label for="confirm-checkbox">I understand this will immediately and permanently delete my private data, and that shared records may be retained for other participants as described in the retention policy.</label>
+
+        <div class="progress-bars">
+            <div class="bar active" id="bar-1"></div>
+            <div class="bar" id="bar-2"></div>
+            <div class="bar" id="bar-3"></div>
         </div>
-        <button class="btn-danger" id="btn-submit" disabled>Permanently Delete My Account</button>
+
+        <!-- Verification 1 of 3 -->
+        <div id="verify-step-1">
+            <div class="verify-box">
+                <div class="verify-title">⚠ Verification 1 of 3: Private Records</div>
+                <p>All your recorded private expenses, incomes, custom categories, monthly budgets, and personal lending records will be permanently erased from your device and cloud storage.</p>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" id="check-step-1">
+                <label for="check-step-1">I understand all my private financial records will be permanently deleted.</label>
+            </div>
+        </div>
+
+        <!-- Verification 2 of 3 -->
+        <div id="verify-step-2" hidden>
+            <div class="verify-box">
+                <div class="verify-title">👥 Verification 2 of 3: Shared Ledgers</div>
+                <p>Your access to shared groups and split bills will be terminated. Financial balances will remain preserved for your friends and other participants to avoid data corruption, but your personal identifiers will be removed.</p>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" id="check-step-2">
+                <label for="check-step-2">I understand my active access to shared records and split balances will be revoked.</label>
+            </div>
+        </div>
+
+        <!-- Verification 3 of 3 -->
+        <div id="verify-step-3" hidden>
+            <div class="verify-box">
+                <div class="verify-title">🗑 Verification 3 of 3: Final Authorization</div>
+                <p>Your Google Sign-In profile and Tuvi account credentials will be permanently erased. This operation cannot be reversed or recovered by support.</p>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" id="check-step-3">
+                <label for="check-step-3">I authorize the permanent deletion of my Tuvi account and all data.</label>
+            </div>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn-secondary" id="btn-back" hidden>Back</button>
+            <button class="btn-danger" id="btn-next-1" disabled style="flex:1;">Next (1/3)</button>
+            <button class="btn-danger" id="btn-next-2" disabled hidden style="flex:1;">Next (2/3)</button>
+            <button class="btn-danger" id="btn-submit" disabled hidden style="flex:1;">Wait 15s…</button>
+        </div>
         <button class="btn-secondary" id="btn-signout" style="margin-top: 0.75rem;">Use a different account</button>
         <p class="status-msg error" id="submit-error" hidden></p>
         <p class="status-msg info" id="submit-loading" hidden>Deleting your account — this may take a moment, please don't close this page…</p>
@@ -307,8 +380,79 @@
     const acctEmail = document.getElementById('acct-email');
     const acctUid = document.getElementById('acct-uid');
 
-    const checkbox = document.getElementById('confirm-checkbox');
     const btnSubmit = document.getElementById('btn-submit');
+
+    // ── 3-step progressive verification + 15-second safety lock ──
+    // Mirrors the in-app deletion dialog exactly: same three verification steps, same
+    // countdown length, same gating (final delete only enabled once both the step-3 checkbox
+    // is checked AND the countdown has reached zero).
+    const verifyTitle = document.getElementById('verify-title');
+    const lockBadge = document.getElementById('lock-badge');
+    const lockBadgeText = document.getElementById('lock-badge-text');
+    const bars = [1, 2, 3].map(n => document.getElementById('bar-' + n));
+    const stepPanels = [1, 2, 3].map(n => document.getElementById('verify-step-' + n));
+    const checks = [1, 2, 3].map(n => document.getElementById('check-step-' + n));
+    const btnNext1 = document.getElementById('btn-next-1');
+    const btnNext2 = document.getElementById('btn-next-2');
+    const btnBack = document.getElementById('btn-back');
+
+    let verifyStep = 1;
+    let countdown = 15;
+    let countdownTimer = null;
+
+    function renderVerifyStep() {
+        verifyTitle.textContent = `Delete Account (Step ${verifyStep} of 3)`;
+        bars.forEach((bar, i) => bar.classList.toggle('active', i + 1 <= verifyStep));
+        stepPanels.forEach((panel, i) => panel.hidden = i + 1 !== verifyStep);
+        btnBack.hidden = verifyStep === 1;
+        btnNext1.hidden = verifyStep !== 1;
+        btnNext2.hidden = verifyStep !== 2;
+        btnSubmit.hidden = verifyStep !== 3;
+        btnNext1.disabled = !checks[0].checked;
+        btnNext2.disabled = !checks[1].checked;
+        updateSubmitButton();
+    }
+
+    function updateSubmitButton() {
+        if (verifyStep !== 3) return;
+        const ready = checks[2].checked && countdown === 0;
+        btnSubmit.disabled = !ready;
+        btnSubmit.textContent = countdown > 0 ? `Wait ${countdown}s…` : 'Permanently Delete';
+    }
+
+    function startCountdown() {
+        countdown = 15;
+        if (countdownTimer) clearInterval(countdownTimer);
+        updateLockBadge();
+        countdownTimer = setInterval(() => {
+            countdown = Math.max(0, countdown - 1);
+            updateLockBadge();
+            updateSubmitButton();
+            if (countdown === 0) clearInterval(countdownTimer);
+        }, 1000);
+    }
+
+    function updateLockBadge() {
+        if (countdown > 0) {
+            lockBadge.className = 'lock-badge waiting';
+            lockBadgeText.textContent = `Safety Lock: ${countdown}s wait`;
+        } else {
+            lockBadge.className = 'lock-badge cleared';
+            lockBadgeText.textContent = 'Safety Lock Cleared';
+        }
+    }
+
+    function resetVerification() {
+        verifyStep = 1;
+        checks.forEach(c => c.checked = false);
+        startCountdown();
+        renderVerifyStep();
+    }
+
+    checks.forEach(c => c.addEventListener('change', renderVerifyStep));
+    btnNext1.addEventListener('click', () => { verifyStep = 2; renderVerifyStep(); });
+    btnNext2.addEventListener('click', () => { verifyStep = 3; renderVerifyStep(); });
+    btnBack.addEventListener('click', () => { verifyStep = Math.max(1, verifyStep - 1); renderVerifyStep(); });
 
     document.getElementById('btn-google-signin').addEventListener('click', async () => {
         signinError.hidden = true;
@@ -322,11 +466,8 @@
     });
 
     document.getElementById('btn-signout').addEventListener('click', async () => {
+        if (countdownTimer) clearInterval(countdownTimer);
         await signOut(auth);
-    });
-
-    checkbox.addEventListener('change', () => {
-        btnSubmit.disabled = !checkbox.checked;
     });
 
     onAuthStateChanged(auth, (user) => {
@@ -338,9 +479,9 @@
             acctPhoto.style.display = user.photoURL ? 'block' : 'none';
             acctEmail.textContent = user.email || '(no email on this account)';
             acctUid.textContent = 'Account ID: ' + user.uid;
-            checkbox.checked = false;
-            btnSubmit.disabled = true;
+            resetVerification();
         } else {
+            if (countdownTimer) clearInterval(countdownTimer);
             stepSignin.hidden = false;
             stepConfirm.hidden = true;
         }

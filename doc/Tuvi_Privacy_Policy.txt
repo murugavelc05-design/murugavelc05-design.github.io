@@ -1,6 +1,6 @@
 Privacy Policy — Tuvi
 
-Last Updated: October 11, 2026
+Last Updated: October 19, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
@@ -98,10 +98,10 @@ Tuvi allows users to voluntarily share ledgers, split bills, and lending/borrowi
 
 7. Data Retention, Account Deletion & Safety Lock
 
-Tuvi retains your data while your account is active. You have complete control over your data and can permanently delete your account at any time.
+Tuvi retains your data while your account is active. You have complete control over your data and can permanently delete your account at any time, either in the app (Settings → Privacy & Security → Delete Account) or on the web without installing the app, at https://murugavelc05-design.github.io/delete-account.html, by signing in with the same Google account.
 
 15-Second Safety Lock & 3-Step Verification:
-To prevent accidental, unintended, or impulsive account wipes, Tuvi enforces a mandatory safety lock:
+To prevent accidental, unintended, or impulsive account wipes, Tuvi enforces the same mandatory safety lock on both the in-app and web deletion flows:
 1. A 15-second countdown security lock must elapse before the deletion action can be authorized.
 2. A progressive 3-step verification confirmation requires explicit acknowledgment of:
    • Step 1: Permanent erasure of all private financial records (expenses, income, budgets, categories).
