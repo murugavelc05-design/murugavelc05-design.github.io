@@ -1,6 +1,6 @@
 Privacy Policy — Tuvi
 
-Last Updated: October 19, 2026
+Last Updated: October 24, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
@@ -10,7 +10,7 @@ This Privacy Policy explains how Tuvi ("Tuvi", "we", "our", "us", or "the App") 
 
 Tuvi is a personal money management and financial tracking application designed to help users record and organize income, expenses, categories, lending and borrowing, repayments, settlements, financial insights, budgets, and shared or split bills.
 
-By downloading, installing, accessing, or using Tuvi, you agree to the practices described in this Privacy Policy. If you do not agree with this Policy, please do not use the App.
+By downloading, installing, accessing, or using Tuvi, you acknowledge that you have read and understood the practices described in this Privacy Policy. Where applicable law requires your separate or explicit consent for a specific processing activity, we will seek that consent through the App before carrying it out. If you do not agree with this Policy, please do not use the App.
 
 2. Information We Collect
 
@@ -24,7 +24,7 @@ Tuvi uses Google Sign-In and Firebase Authentication for secure account authenti
 
 Tuvi does not have access to or store your Google Account password. Authentication is handled securely through Google Identity Services and Firebase Authentication.
 
-Before you sign in with Google, the App may briefly establish an anonymous Firebase Authentication session (an auto-generated, temporary identifier with no personal information attached) to enable offline-first local functionality. This anonymous identifier is replaced once you sign in with Google.
+Before you sign in with Google, the App may briefly establish an anonymous Firebase Authentication session (an auto-generated, temporary identifier with no personal information attached) to enable offline-first local functionality. When you sign in with Google, the App attempts to link this anonymous session to your Google account so that any data recorded during the anonymous session carries over to your permanent account. In rare cases where linking is not possible (for example, if the Google account is already registered), you are signed in directly under your Google account's existing identity, and data recorded during the anonymous session may not automatically transfer.
 
 Financial Information
 
@@ -63,7 +63,7 @@ Tuvi uses an offline-first architecture combined with Google Firebase cloud infr
 • Local Storage: Cached locally on your device to support fast performance, smooth animations, and complete offline access.
 • Cloud Storage: Synchronized to Google Cloud Firestore under your authenticated Firebase UID when internet connectivity is available.
 
-Cloud synchronization ensures your data is safely backed up and available when you sign in across supported devices or reinstall the application. All communications with Cloud Firestore and Firebase Authentication use industry-standard HTTPS / TLS encryption in transit.
+Cloud synchronization is designed so your data remains backed up and accessible when you sign in across supported devices or reinstall the application, subject to normal network conditions and successful account authentication. All communications with Cloud Firestore and Firebase Authentication use industry-standard HTTPS / TLS encryption in transit.
 
 4. How We Use Your Information
 
@@ -93,7 +93,7 @@ Tuvi allows users to voluntarily share ledgers, split bills, and lending/borrowi
 
 • Granular Sharing: A financial record is shared only when you explicitly connect a record with another user via their verified email or user identifier.
 • Participant Access: All active participants associated with a shared record can view the transaction amount, date, description note, and settlement repayment history.
-• Privacy Control: You can remove participants or make a shared ledger private at any time directly within the App.
+• Privacy Control: You can remove yourself or another participant from a shared record at any time directly within the App; removing a participant revokes that participant's access to the record going forward. This is a per-participant action, not a single toggle that privatizes the record for every remaining participant.
 • Non-Shared Data: Your private income, personal expenses, custom categories, and personal monthly budgets are never shared with other users.
 
 7. Data Retention, Account Deletion & Safety Lock
@@ -118,7 +118,7 @@ When account deletion is confirmed:
 
 8. Children's Privacy
 
-Tuvi is designed for general audiences and is not directed to children under the age of 13 (or the minimum legal age in your jurisdiction). We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us at support.tuvi@gmail.com, and we will promptly delete such information.
+Tuvi is designed for general audiences. We do not knowingly collect personal information from children.
 
 9. International Data Transfers
 
@@ -128,7 +128,6 @@ Tuvi uses Google Firebase cloud infrastructure. Your data may be stored and proc
 
 Depending on your jurisdiction, you have the right to:
 • Access the personal and financial information stored in your account.
-• Export your financial records into standard CSV or JSON backup files directly from the App settings.
 • Update or edit your profile information, categories, budgets, and transaction records.
 • Permanently delete your entire account and all associated private records at any time.
 

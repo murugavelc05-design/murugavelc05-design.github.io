@@ -1,6 +1,6 @@
 Terms & Conditions — Tuvi
 
-Last Updated: October 2, 2026
+Last Updated: October 24, 2026
 App: Tuvi — Money Manager
 Package: com.tuvi.moneymanager
 
